@@ -29,7 +29,7 @@
   ],
   "categories": [
     {
-      "name": "🤖 AI",
+      "name": "🤖 AI (Artificial Intelligence)",
       "items": [
         {
           "name": "Gemini AI",
@@ -90,7 +90,7 @@
           "name": "Pinterest Downloader",
           "desc": "Search and download images/videos from Pinterest",
           "path": "/pinterest?query=",
-          "innerDesc": "🎨 Search or download from Pinterest\n\nSearch: ?query=SEARCH_TERM&limit=20\nDownload: ?url=PINTEREST_PIN_URL"
+          "innerDesc": "🎨 Search or download from Pinterest\n\nSearch: ?query=SEARCH_TERM&limit=20\nDownload: ?url=PINTEREST_PIN_URL\nDirect download: &download=true"
         }
       ]
     },
@@ -101,7 +101,7 @@
           "name": "Image HD Enhancer",
           "desc": "Enhance image quality to HD using AI",
           "path": "/tools/image-hd",
-          "innerDesc": "🖼️ Enhance image quality to HD using AI\n\nMethod: POST\nFormat: multipart/form-data\nParameter: image (file)\nLimit: 10MB\nFormats: JPG, PNG, WEBP"
+          "innerDesc": "🖼️ Mejora la calidad de tus imágenes a HD con IA\n\nMétodo: POST\nFormato: multipart/form-data\nParámetro: image (el archivo)\nLímite: 10MB\nFormatos: JPG, PNG, WEBP\n\nEjemplo:\ncurl -X POST -F \"image=@foto.jpg\" /tools/image-hd"
         }
       ]
     }
