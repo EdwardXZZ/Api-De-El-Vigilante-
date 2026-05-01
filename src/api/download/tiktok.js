@@ -376,7 +376,7 @@ module.exports = function(app) {
         if (!url) {
             return res.status(400).json({
                 status: false,
-                creator: 'DVWILKER',
+                creator: 'DVLYONN',
                 error: 'URL parameter is required',
                 message: 'Please provide a TikTok URL: ?url=TIKTOK_URL'
             });
@@ -397,7 +397,7 @@ module.exports = function(app) {
             
             res.status(200).json({
                 status: true,
-                creator: 'DVWILKER',
+                creator: 'DVLYONN',
                 result: result,
                 download_url: `/download/tiktok?url=${encodeURIComponent(url)}&download=true`
             });
@@ -406,7 +406,7 @@ module.exports = function(app) {
             console.error('TikTok error:', error);
             res.status(500).json({
                 status: false,
-                creator: 'DVWILKER',
+                creator: 'DVLYONN',
                 error: error.message || 'Failed to download TikTok video'
             });
         }
