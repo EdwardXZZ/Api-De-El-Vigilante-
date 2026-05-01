@@ -1020,10 +1020,13 @@
         }
 
         function renderHomePage(container) {
-            const imageSrc = "https://files.catbox.moe/9f471m.png";
+            const imageSrc = Array.isArray(settings.header.imageSrc) && settings.header.imageSrc.length > 0
+                ? settings.header.imageSrc[Math.floor(Math.random() * settings.header.imageSrc.length)]
+                : '';
+
             container.innerHTML = `
                 <div class="home-banner">
-                    <img src="${imageSrc}" alt="${settings.name || 'API'}" style="max-width: 40%;">
+                    ${imageSrc ? `<img src="${imageSrc}" alt="${settings.name}" style="max-width: ${settings.header.imageSize?.desktop || '40%'}">` : ''}
                     <h1 class="home-title">${settings.name || 'API'}</h1>
                     <div class="home-version">${settings.version || 'v1.0'}</div>
                     <p class="home-description">${settings.description || 'API Documentation'}</p>
