@@ -1,7 +1,7 @@
 {
-  "name": "GohanApi",
+  "name": "AlyaApi",
   "version": "1.0.2",
-  "description": "Todo lo que imaginas, un request de distancia.",
+  "description": "Alya Apis Oficial.",
   "header": {
     "status": "ONLINE",
     "imageSrc": [
@@ -14,13 +14,13 @@
     }
   },
   "apiSettings": {
-    "creator": "dvwilker  -  Copyright Api Gohan 2026",
+    "creator": "dvlyonn  -  Copyright Api Alya 2026",
     "limit": "5500"
   },
   "links": [
     {
       "name": "Source Code",
-      "url": "https://github.com/dvwilker/Api-Gohan/"
+      "url": "https://github.com/Feroficial/Api-Gohan-xd/"
     },
     {
       "name": "Contact Me",
