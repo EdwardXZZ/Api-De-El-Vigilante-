@@ -161,7 +161,7 @@ module.exports = function(app) {
 
             return res.status(statusCode).json({
                 status: false,
-                creator: "DVWILKER",
+                creator: "DVLYONN",
                 error: message && statusCode !== 500 ? message : "Ocurrió un error interno en el servidor."
             });
         }
