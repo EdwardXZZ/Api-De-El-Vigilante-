@@ -5,7 +5,7 @@
   "header": {
     "status": "ONLINE",
     "imageSrc": [
-      "http://alyafiles.onrender.com/f/f32be20de147815b.png"
+      "https://files.catbox.moe/74aty6.jpg"
     ],
     "imageSize": {
       "mobile": "80%",
@@ -49,9 +49,9 @@
         },
         {
           "name": "Random Meme",
-          "desc": "Get a random meme from Reddit",
+          "desc": "Meme aleatorio de Reddit/Pinterest/Imgflip en español",
           "path": "/random/meme",
-          "innerDesc": "🖼️ Meme aleatorio\n\nEjemplo: /random/meme\nImagen directa: /random/meme?imagen=true"
+          "innerDesc": "🖼️ Meme aleatorio de múltiples fuentes\n\nEjemplo: /random/meme\nImagen directa: /random/meme?imagen=true"
         }
       ]
     },
@@ -114,6 +114,12 @@
           "desc": "Enhance image quality to HD using AI",
           "path": "/tools/image-hd",
           "innerDesc": "🖼️ Mejora la calidad de tus imágenes a HD con IA\n\nMétodo: POST\nFormato: multipart/form-data\nParámetro: image (el archivo)\nLímite: 10MB\nFormatos: JPG, PNG, WEBP\n\nEjemplo:\ncurl -X POST -F \"image=@foto.jpg\" /tools/image-hd"
+        },
+        {
+          "name": "Traductor",
+          "desc": "Translate text to any language",
+          "path": "/translate?text=",
+          "innerDesc": "🌐 Traduce texto a cualquier idioma\n\nParámetros:\n• text - Texto a traducir\n• target - Idioma destino (default: es)\n\nEjemplo: /translate?text=Hello&target=es\nCódigos: es, en, fr, it, pt, de, ja, ko, zh, ru"
         }
       ]
     }
