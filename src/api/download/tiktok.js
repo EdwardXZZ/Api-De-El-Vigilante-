@@ -5,7 +5,7 @@ const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
 
 async function tiktokDownload(url, quality = 'low') {
     try {
-        // Usamos tikwm.com porque es rápido y da opciones de calidad
+        
         const apiUrl = `https://tikwm.com/api/?url=${encodeURIComponent(url)}`;
         const response = await axios.get(apiUrl, {
             headers: { 'User-Agent': UA },
@@ -15,7 +15,6 @@ async function tiktokDownload(url, quality = 'low') {
         const data = response.data.data;
         if (!data) throw new Error('No se pudo obtener el video');
 
-        // Priorizar calidad baja (wmplay) -> menor peso y 360p aprox
         let videoUrl = data.wmplay || data.hdplay || data.play;
         let qualityText = '360p (ligero)';
         
