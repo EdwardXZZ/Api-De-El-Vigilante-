@@ -2,12 +2,39 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+const BASE = 'https://apkcombo.com';
 
-const APKCOMBO_BASE = 'https://apkcombo.com';
+async function searchApk(query, limit = 5) {
+    try {
+        const url = `${BASE}/es/search?q=${encodeURIComponent(query)}`;
+        const { data } = await axios.get(url, {
+            headers: {
+                'User-Agent': UA,
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+                'Accept-Language': 'es-ES,es;q=0.8,en-US;q=0.5,en;q=0.3'
+            },
+            timeout: 15000
+        });
+        const $ = cheerio.load(data);
+        const results = [];
 
-function cleanString(text) {
-    if (!text) return '';
-    return text.replace(/\s+/g, ' ').trim();
+        $('.card, .search-result, .media').each((i, el) => {
+            if (results.length >= limit) return false;
+            const linkEl = $(el).find('a').first();
+            let link = linkEl.attr('href');
+            if (!link) return;
+            if (link.startsWith('/')) link = BASE + link;
+            const name = $(el).find('.title, h4').first().text().trim();
+            const version = $(el).find('.version, .version-text').first().text().trim();
+            const size = $(el).find('.size, .file-size').first().text().trim();
+            if (name && link) results.push({ name, link, version, size, fuente: 'APKCombo' });
+        });
+
+        if (results.length === 0) throw new Error('No se encontraron resultados');
+        return results;
+    } catch (err) {
+        throw new Error(`Error en búsqueda: ${err.message}`);
+    }
 }
 
 async function getDownloadUrl(apkUrl) {
@@ -15,21 +42,20 @@ async function getDownloadUrl(apkUrl) {
         const { data } = await axios.get(apkUrl, { headers: { 'User-Agent': UA }, timeout: 15000 });
         const $ = cheerio.load(data);
         let downloadLink = null;
+
         const selectors = [
-            'a[download]', 
-            '.download-button', 
-            'a:contains("Download APK")', 
-            'a[href*="download"]',
-            '.btn-download'
+            'a.download-button', 'a[download]', '.btn-download', 'a:contains("Download APK")',
+            'a[href*="download"]', 'a[href*=".apk"]'
         ];
-        for (const selector of selectors) {
-            const el = $(selector).first();
+        for (const sel of selectors) {
+            const el = $(sel).first();
             const href = el.attr('href');
-            if (href && href.startsWith('http')) {
-                downloadLink = href;
+            if (href && (href.startsWith('http') || href.startsWith('/'))) {
+                downloadLink = href.startsWith('/') ? BASE + href : href;
                 break;
             }
         }
+
         if (!downloadLink) {
             const scripts = $('script').map((i, el) => $(el).html()).get();
             for (const script of scripts) {
@@ -40,57 +66,11 @@ async function getDownloadUrl(apkUrl) {
                 }
             }
         }
+
         if (!downloadLink) throw new Error('No se encontró enlace de descarga');
         return { url: downloadLink };
-    } catch (error) {
-        throw new Error(`Error obteniendo descarga: ${error.message}`);
-    }
-}
-
-async function searchApk(query, limit = 5) {
-    try {
-        const url = `${APKCOMBO_BASE}/es/search?q=${encodeURIComponent(query)}`;
-        const { data } = await axios.get(url, {
-            headers: { 'User-Agent': UA },
-            timeout: 15000
-        });
-        const $ = cheerio.load(data);
-        const results = [];
-
-        const selectores = [
-            '.search-result',
-            '.media',
-            '.col-sm-4',
-            '.card'
-        ];
-
-        for (const selector of selectores) {
-            const elements = $(selector);
-            if (elements.length > 0) {
-                elements.each((i, el) => {
-                    if (results.length >= limit) return false;
-                    const titleElem = $(el).find('.title');
-                    const name = cleanString(titleElem.text());
-                    const link = $(el).find('a').first().attr('href');
-                    let fullLink = null;
-                    if (link && link.startsWith('/')) fullLink = APKCOMBO_BASE + link;
-                    else if (link && link.startsWith('http')) fullLink = link;
-                    const versionElem = $(el).find('.version');
-                    const version = cleanString(versionElem.text());
-                    const sizeElem = $(el).find('.size');
-                    const size = cleanString(sizeElem.text());
-                    if (name && fullLink) results.push({ name, link: fullLink, version, size, fuente: 'APKCombo' });
-                });
-                if (results.length > 0) break;
-            }
-        }
-
-        if (results.length === 0) {
-            throw new Error('No se encontraron resultados');
-        }
-        return results;
-    } catch (error) {
-        throw new Error(`Error en búsqueda: ${error.message}`);
+    } catch (err) {
+        throw new Error(`Error obteniendo descarga: ${err.message}`);
     }
 }
 
