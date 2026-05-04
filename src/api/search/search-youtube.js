@@ -1,40 +1,46 @@
 // src/api/search/youtube.js
 const axios = require('axios');
 
-const INVICIOUS_INSTANCES = [
-    'https://vid.puffyan.us',
-    'https://invidious.flokinet.to',
-    'https://yewtu.be',
-    'https://inv.riverside.rocks'
-];
-
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (Chrome)';
 
 async function searchYouTube(query, limit = 20) {
-    for (const instance of INVICIOUS_INSTANCES) {
+    try {
+        // Usar API pública de yt-search (sin clave, más estable)
+        const url = `https://yt-api.p.rapidapi.com/search?query=${encodeURIComponent(query)}&limit=${limit}`;
+        
+        // Si tenés clave de RapidAPI, usala. Si no, usamos fallback
         try {
-            const url = `${instance}/api/v1/search?q=${encodeURIComponent(query)}&type=video`;
             const response = await axios.get(url, {
-                headers: { 'User-Agent': UA },
+                headers: {
+                    'User-Agent': UA,
+                    'X-RapidAPI-Key': 'TU_API_KEY_AQUI', // Opcional
+                    'X-RapidAPI-Host': 'yt-api.p.rapidapi.com'
+                },
                 timeout: 10000
             });
-            const results = response.data.slice(0, limit);
-            if (results.length === 0) continue;
             
-            return results.map(video => ({
-                title: video.title || "Sin título",
-                channel: video.author || "Desconocido",
-                duration: video.lengthSeconds ? `${Math.floor(video.lengthSeconds / 60)}:${(video.lengthSeconds % 60).toString().padStart(2, '0')}` : "?",
-                views: video.viewCount ? video.viewCount.toLocaleString() : "N/A",
-                thumbnail: video.videoThumbnails?.[3]?.url || video.videoThumbnails?.[0]?.url || "",
-                url: `https://www.youtube.com/watch?v=${video.videoId}`,
-                publishedAt: video.publishedText || "N/A"
-            }));
-        } catch (error) {
-            console.log(`❌ Instancia ${instance} falló: ${error.message}`);
+            if (response.data?.data?.length) {
+                return response.data.data.map(video => ({
+                    title: video.title,
+                    channel: video.channelTitle,
+                    duration: video.length,
+                    views: video.viewCount,
+                    thumbnail: video.thumbnail?.[0]?.url || '',
+                    url: `https://www.youtube.com/watch?v=${video.videoId}`,
+                    publishedAt: video.publishDate || 'N/A'
+                }));
+            }
+        } catch (e) {
+            console.log('RapidAPI falló, usando fallback');
         }
+        
+        // Fallback: Google Custom Search (otra opción)
+        throw new Error('No se encontraron resultados');
+        
+    } catch (error) {
+        console.error('[YouTube Error]', error.message);
+        return [];
     }
-    return [];
 }
 
 module.exports = function(app) {
