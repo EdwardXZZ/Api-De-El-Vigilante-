@@ -1,11 +1,11 @@
+// src/api/search/youtube.js
 const axios = require('axios');
 
 const INVICIOUS_INSTANCES = [
-    'https://invidious.snopyta.org',
-    'https://yewtu.be',
-    'https://inv.riverside.rocks',
+    'https://vid.puffyan.us',
     'https://invidious.flokinet.to',
-    'https://inv.zzls.xyz'
+    'https://yewtu.be',
+    'https://inv.riverside.rocks'
 ];
 
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (Chrome)';
@@ -20,10 +20,10 @@ async function searchYouTube(query, limit = 20) {
             });
             const results = response.data.slice(0, limit);
             if (results.length === 0) continue;
+            
             return results.map(video => ({
                 title: video.title || "Sin título",
                 channel: video.author || "Desconocido",
-                channelId: video.authorId || "",
                 duration: video.lengthSeconds ? `${Math.floor(video.lengthSeconds / 60)}:${(video.lengthSeconds % 60).toString().padStart(2, '0')}` : "?",
                 views: video.viewCount ? video.viewCount.toLocaleString() : "N/A",
                 thumbnail: video.videoThumbnails?.[3]?.url || video.videoThumbnails?.[0]?.url || "",
@@ -31,7 +31,7 @@ async function searchYouTube(query, limit = 20) {
                 publishedAt: video.publishedText || "N/A"
             }));
         } catch (error) {
-            console.log(`Instancia ${instance} falló: ${error.message}`);
+            console.log(`❌ Instancia ${instance} falló: ${error.message}`);
         }
     }
     return [];
