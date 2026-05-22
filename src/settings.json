@@ -1,7 +1,7 @@
 {
-  "name": "DANNY API",
+  "name": "API DE EL VIGILANTE",
   "version": "1.0",
-  "description": "DANNY API Oficial - Tu mejor aliado para integraciones.",
+  "description": "API DE EL VIGILANTE Oficial - Tu mejor aliado para integraciones.",
   "header": {
     "status": "ONLINE",
     "imageSrc": [
@@ -14,13 +14,13 @@
     }
   },
   "apiSettings": {
-    "creator": "Danny - Copyright DANNY API 2026",
+    "creator": "El Vigilante - Copyright API DE EL VIGILANTE 2025",
     "limit": "5500"
   },
   "links": [
     {
       "name": "Source Code",
-      "url": "https://github.com/Feroficial/Api-Gohan-xd/"
+      "url": "https://github.com/EdwardXZZ/Server-EdwardXZZ-"
     },
     {
       "name": "Contact Me",
@@ -29,13 +29,13 @@
   ],
   "categories": [
     {
-      "name": "🤖 AI (Artificial Intelligence)",
+      "name": "🤖 AI (Inteligencia Artificial)",
       "items": [
         {
           "name": "Gemini AI",
-          "desc": "Chat with Gemini Google AI",
+          "desc": "Chatea con Gemini Google AI",
           "path": "/ai/gemini?text=",
-          "innerDesc": "🧠 Chat with Google Gemini AI\n\nExample: /ai/gemini?text=Hola"
+          "innerDesc": "🧠 Chatea con Google Gemini AI\n\nEjemplo: /ai/gemini?text=Hola"
         }
       ]
     },
@@ -44,7 +44,7 @@
       "items": [
         {
           "name": "Blue Archive",
-          "desc": "Blue Archive Random Images",
+          "desc": "Imágenes aleatorias de Blue Archive",
           "path": "/random/ba"
         },
         {
@@ -56,76 +56,76 @@
       ]
     },
     {
-      "name": "🔍 Search Tools",
+      "name": "🔍 Herramientas de Búsqueda",
       "items": [
         {
           "name": "YouTube",
-          "desc": "Video search",
+          "desc": "Búsqueda de videos",
           "path": "/search/youtube?q="
         },
         {
           "name": "TikTok Search",
-          "desc": "Search videos on TikTok",
+          "desc": "Buscar videos en TikTok",
           "path": "/search/tiktok?query=",
-          "innerDesc": "🎵 Search videos on TikTok\n\nParameters:\n• query - Search term\n• limit - Results count (1-30, default: 10)\n\nExample: /search/tiktok?query=badbunny&limit=5"
+          "innerDesc": "🎵 Buscar videos en TikTok\n\nParámetros:\n• query - Término de búsqueda\n• limit - Cantidad de resultados (1-30, default: 10)\n\nEjemplo: /search/tiktok?query=badbunny&limit=5"
         }
       ]
     },
     {
-      "name": "📥 Download",
+      "name": "📥 Descargas",
       "items": [
         {
           "name": "YouTube Audio",
-          "desc": "Download YouTube audio as MP3",
+          "desc": "Descargar audio de YouTube como MP3",
           "path": "/download/ytaudio?url=",
-          "innerDesc": "🎵 Download audio from YouTube\n\nUsage: ?url=YOUTUBE_URL\nDownload: &download=true"
+          "innerDesc": "🎵 Descargar audio de YouTube\n\nUso: ?url=YOUTUBE_URL\nDescargar: &download=true"
         },
         {
           "name": "YouTube Video",
-          "desc": "Download YouTube video as MP4",
+          "desc": "Descargar video de YouTube como MP4",
           "path": "/download/ytvideo?url=",
-          "innerDesc": "🎬 Download video from YouTube\n\nParameters:\n• url - YouTube URL\n• quality - 360, 720, 1080\n• download=true - Direct download"
+          "innerDesc": "🎬 Descargar video de YouTube\n\nParámetros:\n• url - URL de YouTube\n• quality - 360, 720, 1080\n• download=true - Descarga directa"
         },
         {
           "name": "TikTok Downloader",
-          "desc": "Download TikTok video without watermark",
+          "desc": "Descargar video de TikTok sin marca de agua",
           "path": "/download/tiktok?url=",
-          "innerDesc": "📱 Download TikTok videos without watermark\n\nUsage: ?url=TIKTOK_URL\nDownload: &download=true"
+          "innerDesc": "📱 Descargar videos de TikTok sin marca de agua\n\nUso: ?url=TIKTOK_URL\nDescargar: &download=true"
         },
         {
           "name": "Mediafire Downloader",
-          "desc": "Download files from Mediafire",
+          "desc": "Descargar archivos de Mediafire",
           "path": "/download/mediafire?url=",
-          "innerDesc": "📦 Download files from Mediafire\n\nUsage: ?url=MEDIAFIRE_URL\nDownload: &download=true"
+          "innerDesc": "📦 Descargar archivos de Mediafire\n\nUso: ?url=MEDIAFIRE_URL\nDescargar: &download=true"
         },
         {
           "name": "Pinterest Downloader",
-          "desc": "Search and download images/videos from Pinterest",
+          "desc": "Buscar y descargar imágenes/videos de Pinterest",
           "path": "/pinterest?query=",
-          "innerDesc": "🎨 Search or download from Pinterest\n\nSearch: ?query=SEARCH_TERM&limit=20\nDownload: ?url=PINTEREST_PIN_URL\nDirect download: &download=true"
+          "innerDesc": "🎨 Buscar o descargar de Pinterest\n\nBuscar: ?query=TÉRMINO&limit=20\nDescargar: ?url=PINTEREST_PIN_URL\nDescarga directa: &download=true"
         },
         {
           "name": "Facebook Downloader",
-          "desc": "Download videos from Facebook",
+          "desc": "Descargar videos de Facebook",
           "path": "/download/facebook?url=",
-          "innerDesc": "📘 Download videos from Facebook\n\nUsage: ?url=FB_VIDEO_URL\nDirect download: &download=true"
+          "innerDesc": "📘 Descargar videos de Facebook\n\nUso: ?url=FB_VIDEO_URL\nDescarga directa: &download=true"
         }
       ]
     },
     {
-      "name": "🛠️ Tools",
+      "name": "🛠️ Herramientas",
       "items": [
         {
           "name": "Traductor",
-          "desc": "Translate text to any language",
+          "desc": "Traducir texto a cualquier idioma",
           "path": "/translate?text=",
           "innerDesc": "🌐 Traduce texto a cualquier idioma\n\nParámetros:\n• text - Texto a traducir\n• target - Idioma destino (default: es)\n\nEjemplo: /translate?text=Hello&target=es\nCódigos: es, en, fr, it, pt, de, ja, ko, zh, ru"
         },
         {
-          "name": "URL Shortener",
-          "desc": "Shorten long URLs using TinyURL",
+          "name": "Acortador de URL",
+          "desc": "Acortar enlaces largos usando TinyURL",
           "path": "/shorten?url=",
-          "innerDesc": "🔗 Acorta enlaces largos\n\nUsage: ?url=LONG_URL\n\nExample: /shorten?url=https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          "innerDesc": "🔗 Acorta enlaces largos\n\nUso: ?url=URL_LARGA\n\nEjemplo: /shorten?url=https://www.youtube.com/watch?v=dQw4w9WgXcQ"
         }
       ]
     }
